@@ -4,42 +4,66 @@ author: "Angel Ramos Mendiola"
 date: "03/18/2021"
 output: html_document
 ---
-
 ```{r include=FALSE,echo=FALSE}
 require(tidyverse)
 require(tigerstats)
 triUmp <-read.csv(file="triUmpsal.csv",header=TRUE)
+trimUpF<- filter(triUmp, gender=='F')
 ```
 
 # Introduction
-
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?.  If you skimp in this section expect to be marked down in your grade. Paint a picture of the project a couple of paragraphs is expected!-->
 
-A new  preventative aides drug (triUmpsal) is under test in clinical trials. Consider only the females, does this drug seem effective?  Hint - use dplyr to obtain that subpopulation with the filter command.
+A new  preventative aides drug (triUmpsal) is under test in clinical trials. Consider only the females, does this drug seem effective?  Hint - dplyr to obtain that subpopulation with the filter command used.
 
 # Methods
-
+The methods I will be using to conduct my investigation will be Graphical Descriptive results, Numerical Descriptive results, and Inferential results. All of these methods were made possible by using cat~cat resources. 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
 
 # Results
+  
+The drug is not effective at all in regards to women catching aids.
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
 
 ## Descriptive Results
-
+  
 ### Graphical Descriptive Results
+```{r}
+barchartGC(~infected + treatment, data=trimUpF)
+barchartGC(~infected + treatment, data=trimUpF, type="percent")
+```
 
+  
+The graph above shows that women who get the drug are more likely to get aids. The women who get the placebo are less likely to get aids. 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question. Bottom line is to explain the features of the graph that are relevant to conforming or departing to what is expected by your null hypothesis !-->
 
 ### Numerical Descriptive Results
-
+```{r}
+table1<- xtabs(~infected + treatment, data=trimUpF)
+rowPerc(table1)
+colPerc(table1)
+```
+  
+The numerical results shows that 59% women who caught aids got the drug and the 41% of women who caught aids got the placebo. 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ## Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The P-Value was calculated to 0.0000659 this number is so small, which means that these results are accurate and do not happen by chance.
+
+The odds ratio is 1.543902 which means that women who got the drug were 1.5 times more likely to get aids than the women who got the placebo.  
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
 
 # Discussion and Conclusion
+
+After reviewing the Graphical Descriptive results, the Numerical Descriptive results, and the Inferential results. I know that the drug is not effective at all in regards to women catching aids.  
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
