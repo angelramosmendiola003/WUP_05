@@ -55,7 +55,7 @@ chisqtestGC(table1)
 fisher.test(table1)
 ```
 
-The P-Value was calculated to 0.0000659 this number is so small, which means that these results are accurate and do not happen by chance.
+The P-Value was calculated to 0.0000659 this number is so small it has to be accurate, which means that these results are accurate and do not happen by chance.
 
 The odds ratio is 1.543902 which means that women who got the drug were 1.5 times more likely to get aids than the women who got the placebo.  
 
